@@ -13,18 +13,6 @@ import placeholderNewsImage from '../assets/stock.jpg'
 import axios from 'axios'
 
 const NewsCard = ({news, image, index}) => {
-  // const [image, setImage] = useState({})
-
-  // useEffect(() => {
-  //   const handleFetch = async () => {
-  //     const response = await axios.get(
-  //       'https://api.unsplash.com/photos/random?query=financial&client_id=2xYJs9WB3PSivuGkypSMtFg6mkYnYv6m-AKIh6xaMKY'
-  //     )
-  //     setImage(response.data)
-  //   }
-  //   handleFetch()
-  // }, [])
-
   console.log(image[0].urls.full)
 
   return (
