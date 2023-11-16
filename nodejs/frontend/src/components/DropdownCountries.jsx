@@ -4,13 +4,10 @@ import {Select, Page, setOptions, getJson} from '@mobiscroll/react'
 
 setOptions({
   theme: 'ios',
-  themeVariant: '',
+  themeVariant: 'light',
 })
 
-function DropdownCountries() {
-  // const [myData, setMyData] = useState([])
-  const [selectedCountry, setSelectedCountry] = useState('')
-
+function DropdownCountries({setCountry}) {
   const inputProps = {
     inputStyle: 'box',
     labelStyle: 'stacked',
@@ -24,38 +21,39 @@ function DropdownCountries() {
     {value: 'TH', text: 'Thailand'},
   ]
 
-  // useEffect(() => {
-  //   getJson('https://trial.mobiscroll.com/content/countries.json', (resp) => {
-  //     const countries = []
-  //     for (let i = 0; i < resp.length; ++i) {
-  //       const country = resp[i]
-  //       countries.push({text: country.text, value: country.value})
-  //     }
-  //     setMyData(countries)
-  //   })
-  // }, [])
+  const handleChangeCountry = (event) => {
+    setCountry(event.valueText)
+  }
 
   const renderCustomItem = (item) => {
     return (
-      <div className="md-country-picker-item">
+      <div
+        className="md-country-picker-item"
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+        }}
+      >
         <img
           className="md-country-picker-flag"
           src={
             'https://img.mobiscroll.com/demos/flags/' + item.data.value + '.png'
           }
           alt="Flag"
+          style={{
+            borderRadius: '50%',
+            marginRight: '1rem',
+            width: '30px',
+            height: '30px',
+          }}
         />
         {item.display}
       </div>
     )
   }
 
-  // const handleChange = (event) => {
-  //   setCountry(event.valueText)
-  // }
-
   return (
-    <div style={{width: '15rem'}}>
+    <div style={{marginRight: '1.5rem'}}>
       <Page>
         <Select
           data={myData}
@@ -64,8 +62,8 @@ function DropdownCountries() {
           display="anchored"
           itemHeight={40}
           renderItem={renderCustomItem}
-          // onChange={handleChange}
           filter={true}
+          onChange={handleChangeCountry}
         />
       </Page>
     </div>

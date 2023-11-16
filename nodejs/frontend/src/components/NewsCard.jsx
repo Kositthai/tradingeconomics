@@ -10,28 +10,36 @@ import {
   Stack,
 } from '@mui/material/'
 import placeholderNewsImage from '../assets/stock.jpg'
-import axios from 'axios'
 
-const NewsCard = ({news, image, index}) => {
-  console.log(image[0].urls.full)
+const NewsCard = ({item, image, index, setNewsItemOpen, handleNewsDisplay}) => {
+  const handleOnClick = (item) => {
+    setNewsItemOpen(true)
+
+    handleNewsDisplay({...item, image: image[index].urls.full})
+  }
 
   return (
-    <Card sx={{maxWidth: 345, margin: '2rem 1rem'}}>
+    <Card sx={{maxWidth: 345, margin: '2rem 0'}}>
       <CardMedia
         component="img"
         sx={{width: '100%', objectFit: 'cover'}}
         image={
           image && image[index] ? image[index].urls.full : placeholderNewsImage
         }
-        title={news.title}
+        title={item.title}
       />
       <CardContent>
         <Stack>
-          <Chip label={news.category} sx={{marginLeft: 'auto'}} />
+          <Chip label={item.category} sx={{margin: '.7rem .7rem .7rem auto'}} />
         </Stack>
 
-        <Typography gutterBottom variant="h6" component="div">
-          {news.title}
+        <Typography
+          gutterBottom
+          variant="h6"
+          component="div"
+          style={{fontWeight: '700'}}
+        >
+          {item.title}
         </Typography>
 
         <Typography
@@ -45,12 +53,14 @@ const NewsCard = ({news, image, index}) => {
             WebkitLineClamp: 3,
           }}
         >
-          {news.description}
+          {item.description}
         </Typography>
       </CardContent>
       <CardActions>
         <Button size="small">Share</Button>
-        <Button size="small">Learn More</Button>
+        <Button size="small" onClick={() => handleOnClick({item})}>
+          Read more
+        </Button>
       </CardActions>
     </Card>
   )

@@ -3,7 +3,8 @@ import styled from '@emotion/styled'
 
 const Container = styled.div`
   background: #333333;
-  padding: 1rem 10rem;
+  padding: 1rem 12rem;
+  margin: 0;
 `
 
 const Logo = styled.div`

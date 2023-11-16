@@ -8,7 +8,7 @@ router.get('/unsplash', async (req, res, next) => {
       params: {
         query: 'financial',
         client_id: process.env.UNSPLASH_KEY,
-        per_page: 10, // Set the number of images you want
+        count: 10,
       },
     })
     res.send(response.data.results)
