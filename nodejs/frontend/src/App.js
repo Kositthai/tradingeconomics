@@ -52,10 +52,11 @@ function App() {
         setLoading(true)
         const newsResponse = await axios.get(`${LOCAL_PORT}/news`)
         setNews(newsResponse.data)
+        // setLoading after fetch news completed because if unsplash api not provided, website will use placeholder image.
+        setLoading(false)
 
         const imageResponse = await axios.get(`${LOCAL_PORT}/unsplash`)
         setImage(imageResponse.data)
-        setLoading(false)
       } catch (error) {
         console.log(error)
         setError(true)
@@ -107,7 +108,7 @@ function App() {
                 <DropdownCountries setCountry={setCountry} />
               </HeaderWrapper>
 
-              {!loading && image.length > 0 ? (
+              {!loading ? (
                 <NewsItemContainer>
                   {news?.map((item, index) => {
                     return (
