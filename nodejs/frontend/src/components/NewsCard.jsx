@@ -1,4 +1,3 @@
-import React, {useState, useEffect} from 'react'
 import {
   Card,
   CardMedia,
@@ -10,19 +9,53 @@ import {
   Stack,
 } from '@mui/material/'
 import placeholderNewsImage from '../assets/stock.jpg'
+import styled from '@emotion/styled'
 
-const NewsCard = ({item, image, index, setNewsItemOpen, handleNewsDisplay}) => {
+const StyledCard = styled(Card)`
+  max-width: 345;
+  margin: 2rem 0;
+  display: flex;
+  flex-direction: column;
+`
+
+const StyledCardMedia = styled(CardMedia)`
+  width: 100%;
+  object-fit: cover;
+`
+
+const StyledChip = styled(Chip)`
+  margin: 0.7rem 0.7rem 0.7rem auto;
+`
+
+const StyledTitle = styled(Typography)`
+  font-weight: 700;
+`
+
+const StyledDescription = styled(Typography)`
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+`
+
+const StyledCardActions = styled(CardActions)`
+  margin-top: auto;
+`
+
+const NewsCard = ({item, image, index, setNewsItemOpen, handleReadMore}) => {
+  // This function determines whether the NewsItem component should be displayed, based on a true or false condition.
+  // This function is responsible for identifying and selecting a specific news item. The selected item is then passed to the handleReadMore function.
+  // The handleReadMore function, located in the parent element, takes the selected news item as an argument. When a user clicks the "Read more" button,
+  // this function sets the selected news item, triggering the rendering of the corresponding news content in the NewsItem component.
   const handleOnClick = (item) => {
     setNewsItemOpen(true)
-
-    handleNewsDisplay({...item, image: image[index].urls.full})
+    handleReadMore({...item, image: image[index].urls.full})
   }
 
   return (
-    <Card sx={{maxWidth: 345, margin: '2rem 0'}}>
-      <CardMedia
+    <StyledCard>
+      <StyledCardMedia
         component="img"
-        sx={{width: '100%', objectFit: 'cover'}}
         image={
           image && image[index] ? image[index].urls.full : placeholderNewsImage
         }
@@ -30,39 +63,24 @@ const NewsCard = ({item, image, index, setNewsItemOpen, handleNewsDisplay}) => {
       />
       <CardContent>
         <Stack>
-          <Chip label={item.category} sx={{margin: '.7rem .7rem .7rem auto'}} />
+          <StyledChip label={item.category} />
         </Stack>
 
-        <Typography
-          gutterBottom
-          variant="h6"
-          component="div"
-          style={{fontWeight: '700'}}
-        >
+        <StyledTitle gutterBottom variant="h6" component="div">
           {item.title}
-        </Typography>
+        </StyledTitle>
 
-        <Typography
-          variant="body2"
-          color="text.secondary"
-          sx={{
-            overflow: 'hidden',
-
-            display: '-webkit-box',
-            WebkitBoxOrient: 'vertical',
-            WebkitLineClamp: 3,
-          }}
-        >
+        <StyledDescription variant="body2" color="text.secondary">
           {item.description}
-        </Typography>
+        </StyledDescription>
       </CardContent>
-      <CardActions>
+      <StyledCardActions>
         <Button size="small">Share</Button>
         <Button size="small" onClick={() => handleOnClick({item})}>
           Read more
         </Button>
-      </CardActions>
-    </Card>
+      </StyledCardActions>
+    </StyledCard>
   )
 }
 

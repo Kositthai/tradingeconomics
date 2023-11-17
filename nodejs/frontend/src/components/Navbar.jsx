@@ -1,10 +1,12 @@
-import React from 'react'
 import styled from '@emotion/styled'
 
 const Container = styled.div`
-  background: #333333;
+  background-color: #333333;
   padding: 1rem 12rem;
   margin: 0;
+  position: fixed;
+  width: 100%;
+  z-index: 10;
 `
 
 const Logo = styled.div`
@@ -15,12 +17,10 @@ const Logo = styled.div`
 
 const Trading = styled.p`
   color: #d2d2d2;
-  margin: 0px;
 `
 
 const Economics = styled.p`
   color: #848484;
-  margin: -0.5rem 0;
 `
 
 const Navbar = () => {

@@ -1,11 +1,43 @@
-import React, {useEffect, useState} from 'react'
 import '@mobiscroll/react/dist/css/mobiscroll.min.css'
-import {Select, Page, setOptions, getJson} from '@mobiscroll/react'
+import {Select, Page, setOptions} from '@mobiscroll/react'
+import styled from '@emotion/styled'
+import {css} from '@emotion/react'
 
+// Part of mibiscroll
 setOptions({
   theme: 'ios',
   themeVariant: 'light',
 })
+
+const FlagContainer = styled.div`
+  display: flex;
+  align-items: center;
+`
+
+const StyledFlag = styled.img`
+  border-radius: 50%;
+  margin-right: 1rem;
+  width: 2rem;
+  height: 2rem;
+`
+
+const Container = styled.div`
+  background: transparent;
+`
+
+const mobiscrollStyles = css`
+  .mbsc-ios.mbsc-page {
+    background: transparent;
+  }
+
+  .mbsc-ios.mbsc-select {
+    background: #f6f5f5;
+  }
+`
+
+const CustomStyles = styled.div`
+  ${mobiscrollStyles}
+`
 
 function DropdownCountries({setCountry}) {
   const inputProps = {
@@ -27,46 +59,36 @@ function DropdownCountries({setCountry}) {
 
   const renderCustomItem = (item) => {
     return (
-      <div
-        className="md-country-picker-item"
-        style={{
-          display: 'flex',
-          alignItems: 'center',
-        }}
-      >
-        <img
+      <FlagContainer className="md-country-picker-item" theme="tranparent">
+        <StyledFlag
           className="md-country-picker-flag"
           src={
             'https://img.mobiscroll.com/demos/flags/' + item.data.value + '.png'
           }
           alt="Flag"
-          style={{
-            borderRadius: '50%',
-            marginRight: '1rem',
-            width: '30px',
-            height: '30px',
-          }}
         />
         {item.display}
-      </div>
+      </FlagContainer>
     )
   }
 
   return (
-    <div style={{marginRight: '1.5rem'}}>
-      <Page>
-        <Select
-          data={myData}
-          label="Countries"
-          inputProps={inputProps}
-          display="anchored"
-          itemHeight={40}
-          renderItem={renderCustomItem}
-          filter={true}
-          onChange={handleChangeCountry}
-        />
-      </Page>
-    </div>
+    <CustomStyles>
+      <Container>
+        <Page>
+          <Select
+            data={myData}
+            label="Countries"
+            inputProps={inputProps}
+            display="anchored"
+            itemHeight={40}
+            renderItem={renderCustomItem}
+            filter={true}
+            onChange={handleChangeCountry}
+          />
+        </Page>
+      </Container>
+    </CustomStyles>
   )
 }
 
