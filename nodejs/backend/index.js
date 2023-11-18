@@ -2,7 +2,7 @@ const express = require('express')
 const cors = require('cors')
 
 const newsRouter = require('./routes/news')
-const unsplashRouter = require('./backend/routes/unplash')
+const unsplashRouter = require('./routes/unplash')
 
 const app = express()
 app.use(cors())
