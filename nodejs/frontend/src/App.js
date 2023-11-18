@@ -63,6 +63,7 @@ function App() {
       }
     }
     fetchData()
+    // eslint-disable-line
   }, [])
 
   useEffect(() => {
@@ -82,6 +83,7 @@ function App() {
       handleChangeCountry()
       setCountry('')
     }
+    // eslint-disable-line
   }, [country])
 
   const handleReadMore = (selectedItem) => {
