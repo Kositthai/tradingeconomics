@@ -63,8 +63,7 @@ function App() {
       }
     }
     fetchData()
-    // eslint-disable-line
-  }, [])
+  }, []) // eslint-disable-line
 
   useEffect(() => {
     const handleChangeCountry = async () => {
@@ -83,8 +82,7 @@ function App() {
       handleChangeCountry()
       setCountry('')
     }
-    // eslint-disable-line
-  }, [country])
+  }, [country]) // eslint-disable-line
 
   const handleReadMore = (selectedItem) => {
     setSelectedNews(selectedItem)
