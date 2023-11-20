@@ -16,6 +16,10 @@ const StyledCard = styled(Card)`
   margin: 2rem 0;
   display: flex;
   flex-direction: column;
+
+  :hover {
+    cursor: pointer;
+  }
 `
 
 const StyledCardMedia = styled(CardMedia)`
@@ -53,7 +57,7 @@ const NewsCard = ({item, image, index, setNewsItemOpen, handleReadMore}) => {
   }
 
   return (
-    <StyledCard>
+    <StyledCard onClick={() => setNewsItemOpen(true)}>
       <StyledCardMedia
         component="img"
         image={
